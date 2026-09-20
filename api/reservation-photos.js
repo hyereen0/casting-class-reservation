@@ -35,7 +35,8 @@ module.exports = async function handler(req, res) {
       const photos = {};
       for (const item of listed.data || []) {
         if (item.name !== 'in' && item.name !== 'out') continue;
-        photos[item.name] = `${url}/storage/v1/object/public/${bucket}/${reservationId}/${item.name}`;
+        const signed = await admin.storage.from(bucket).createSignedUrl(`${reservationId}/${item.name}`, 86400);
+        if (!signed.error && signed.data?.signedUrl) photos[item.name] = signed.data.signedUrl;
       }
       return res.status(200).json({ photos });
     }
@@ -47,7 +48,9 @@ module.exports = async function handler(req, res) {
     const raw = data.replace(/^data:[^;]+;base64,/, '');
     const result = await admin.storage.from(bucket).upload(`${reservationId}/${type}`, Buffer.from(raw, 'base64'), { contentType: contentType || 'image/jpeg', upsert: true });
     if (result.error) throw result.error;
-    return res.status(200).json({ url: `${url}/storage/v1/object/public/${bucket}/${reservationId}/${type}` });
+    const signed = await admin.storage.from(bucket).createSignedUrl(`${reservationId}/${type}`, 86400);
+    if (signed.error) throw signed.error;
+    return res.status(200).json({ url: signed.data.signedUrl });
   } catch (error) {
     return res.status(500).json({ error: error.message || '사진 저장에 실패했습니다.' });
   }
