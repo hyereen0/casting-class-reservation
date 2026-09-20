@@ -42,7 +42,10 @@ module.exports = async function handler(req, res) {
     }
 
     if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
-    if (current.data.user.user_metadata?.role !== 'admin') return res.status(403).json({ error: '관리자 권한이 필요합니다.' });
+    if (current.data.user.user_metadata?.role !== 'admin') {
+      const owner = await admin.from('reservations').select('user_id').eq('id', reservationId).maybeSingle();
+      if (owner.error || owner.data?.user_id !== current.data.user.id) return res.status(403).json({ error: '본인 예약만 사진을 올릴 수 있습니다.' });
+    }
     const { type, data, contentType } = req.body || {};
     if (!['in', 'out'].includes(type) || typeof data !== 'string') return res.status(400).json({ error: '사진 정보가 올바르지 않습니다.' });
     const raw = data.replace(/^data:[^;]+;base64,/, '');
