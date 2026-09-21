@@ -10,7 +10,7 @@ function availabilityPanel(){let rows=Object.entries(roomHours).flatMap(([date,r
 function saveRoomHour(event){event.preventDefault();let form=new FormData(event.target),date=form.get('date'),roomId=form.get('room'),start=form.get('start'),end=form.get('end');if(parseInt(end,10)<=parseInt(start,10))return alert('닫는 시간은 여는 시간보다 늦어야 합니다.');roomHours[date]=roomHours[date]||{};roomHours[date][roomId]={start,end};saveRoomHours();render()}
 function removeRoomHour(date,roomId){if(!roomHours[date]?.[roomId])return;delete roomHours[date][roomId];if(!Object.keys(roomHours[date]).length)delete roomHours[date];saveRoomHours();render()}function reservationFrom(r,i){return{id:'r'+i,date:r[0],room:r[1],start:r[2],end:r[3],name:r[4],className:r[5],status:'scheduled',createdAt:'2026-09-10T09:00:00+09:00',note:'',bookedAt:'2026-09-10 09:00'}}
 let authUser=null;
-let state={page:'schedule',weekStart:new Date('2026-09-14T00:00:00+09:00'),filter:'all',role:'user',myTab:'all',adminDate:null};
+let state={page:'schedule',weekStart:null,filter:'all',role:'user',myTab:'all',adminDate:null};
 const $=s=>document.querySelector(s); const fmtDate=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; const krDate=d=>`${d.getMonth()+1}월 ${d.getDate()}일`; const save=()=>{localStorage.setItem('casting-reservations',JSON.stringify(db.reservations));localStorage.setItem('casting-checkins',JSON.stringify(db.checkIns));localStorage.setItem('casting-photos',JSON.stringify(db.photos));localStorage.setItem('casting-reports',JSON.stringify(db.reports));localStorage.setItem('casting-penalties',JSON.stringify(db.penalties))};
 function usernameEmail(username){let bytes=new TextEncoder().encode(username.trim());let binary=Array.from(bytes,byte=>String.fromCharCode(byte)).join('');return `id_${btoa(binary).replace(/[^a-zA-Z0-9]/g,'')}@castingclass.local`}
 function displayUser(user){if(!user)return null;let copy={...user};if(copy.email?.startsWith('id_')&&copy.email.endsWith('@castingclass.local')){let encoded=copy.email.slice(3,-'@castingclass.local'.length);try{copy.email=decodeURIComponent(Array.from(atob(encoded),char=>`%${char.charCodeAt(0).toString(16).padStart(2,'0')}`).join(''))}catch(error){}}return copy}
@@ -22,6 +22,7 @@ async function changePassword(event){event.preventDefault();let password=new For
 function render(){if(!authUser){document.querySelector('#app').innerHTML=loginPage();return}renderApp()}
 function seoulNow(){return new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Seoul'}))}
 function nextWeekStart(){let now=seoulNow(),monday=new Date(now);monday.setDate(now.getDate()-(now.getDay()||7)+1);monday.setHours(0,0,0,0);return monday}
+state.weekStart=nextWeekStart();
 function reservationOpen(date){if(!date)return true;let today=seoulNow();today.setHours(0,0,0,0);let last=new Date(today);last.setDate(last.getDate()+7);let selected=new Date(`${date}T00:00:00`);return selected>=today&&selected<=last}
 function reservationWindowLabel(){let today=seoulNow(),last=new Date(today);last.setDate(last.getDate()+7);return `오늘부터 ${last.getMonth()+1}월 ${last.getDate()}일까지 예약할 수 있습니다.`}
 function reservationHours(reservation){return Math.max(0,(parseInt(reservation.end)-parseInt(reservation.start)))}
