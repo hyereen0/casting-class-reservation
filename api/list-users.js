@@ -11,9 +11,15 @@ module.exports = async function handler(req, res) {
   const current = await auth.auth.getUser(token);
   if (current.error || current.data.user?.user_metadata?.role !== 'admin') return res.status(403).json({ error: '관리자 권한이 필요합니다.' });
   const admin = createClient(url, serviceKey);
-  const result = await admin.auth.admin.listUsers({ page: 1, perPage: 100 });
-  if (result.error) return res.status(500).json({ error: result.error.message });
-  return res.status(200).json({ users: result.data.users.map(user => ({
+  const users = [];
+  const perPage = 100;
+  for (let page = 1; ; page += 1) {
+    const result = await admin.auth.admin.listUsers({ page, perPage });
+    if (result.error) return res.status(500).json({ error: result.error.message });
+    users.push(...result.data.users);
+    if (result.data.users.length < perPage) break;
+  }
+  return res.status(200).json({ users: users.map(user => ({
     id: user.id,
     username: user.user_metadata?.username || '아이디 미설정',
     role: user.user_metadata?.role === 'admin' ? '관리자' : '일반 사용자',
