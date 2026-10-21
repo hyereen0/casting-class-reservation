@@ -4,3 +4,32 @@
 @media(max-width:900px){.sidebar{display:none}.main{margin-left:0}.topbar{height:62px;padding:0 18px}.top-actions .icon-btn{display:none}.content{padding:24px 18px 82px}.page-head{display:block}.page-title{font-size:22px}.week-tools{margin-top:17px;justify-content:space-between}.week-nav strong{min-width:0;font-size:13px}.desktop-only{display:block}.mobile-only{display:none}.calendar-card{box-shadow:none;border:1px solid var(--line);background:#fff;overflow-x:auto;overflow-y:hidden}.calendar-grid{display:grid;min-width:920px}.calendar-grid>*{display:block}.mobile-agenda{display:none}.agenda-day{margin-bottom:18px}.agenda-head{display:flex;justify-content:space-between;align-items:center;padding:12px 2px}.agenda-head strong{font-size:14px}.agenda-head span{font-size:11px;color:var(--muted)}.agenda-list{display:grid;gap:8px}.agenda-booking{background:#fff;border:1px solid var(--line);border-left:4px solid;border-radius:10px;padding:12px 13px;display:flex;justify-content:space-between;box-shadow:var(--shadow)}.agenda-booking.a{border-left-color:var(--coral)}.agenda-booking.b{border-left-color:var(--blue)}.agenda-booking.c{border-left-color:var(--mint)}.agenda-booking strong{display:block;font-size:13px}.agenda-booking span{color:var(--muted);font-size:11px}.dashboard-grid{grid-template-columns:repeat(2,1fr);gap:10px}.stat-card{padding:14px}.stat-value{font-size:22px}.form-row{grid-template-columns:1fr}.form-panel{max-width:none}.room-selects{grid-template-columns:1fr}.time-options{grid-template-columns:repeat(3,1fr)}.reservation-card{align-items:flex-start;gap:10px}.res-right{min-width:90px}.drawer{width:100%;padding:22px}.mobile-nav{position:fixed;display:flex;bottom:0;inset-inline:0;height:64px;background:#fff;border-top:1px solid var(--line);z-index:10;justify-content:space-around}.mobile-nav button{color:#9aa2ad;font-size:11px;text-align:center}.mobile-nav button.active{color:var(--coral);font-weight:700}.mobile-nav span{display:block;font-size:20px;line-height:22px;margin-bottom:2px}.notice{margin-top:14px}.filter-row{display:block}.filters{overflow:auto;padding-bottom:2px}.legend{padding-bottom:10px}}
 .account-list-head{align-items:flex-start;gap:20px}.account-count{margin-left:8px;color:var(--coral);font-size:13px;font-weight:700}.account-search{width:min(220px,100%);margin-top:0}.account-number{width:54px;color:var(--muted);font-weight:600;text-align:center}
 @media(max-width:600px){.account-list-head{display:block}.account-search{width:100%;margin-top:14px}.account-number{width:42px}}
+.artist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px}
+.artist-card{padding:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;text-align:left;box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease}
+.artist-card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(23,32,43,.12)}
+.artist-card-photo{aspect-ratio:3/4;background:linear-gradient(160deg,#eceff3,#dfe4ea);overflow:hidden}
+.artist-card-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter .2s ease}
+.artist-card:hover .artist-card-photo img{filter:grayscale(0)}
+.artist-card-body{padding:15px 18px 17px}
+.artist-card-name{font-size:17px;font-weight:800;letter-spacing:-.4px}
+.artist-card-eng{margin-top:3px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:2.4px}
+.artist-photo-empty{display:grid;place-items:center}
+.artist-photo-empty span{width:84px;height:84px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:32px;font-weight:800;color:#b3bac4}
+.artist-panel{padding:40px}
+.artist-profile{display:grid;grid-template-columns:minmax(260px,380px) 1fr;gap:54px;align-items:start}
+.artist-photo{aspect-ratio:3/4;border-radius:var(--radius);overflow:hidden;background:linear-gradient(160deg,#eceff3,#dfe4ea)}
+.artist-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.artist-name-kr{font-size:36px;font-weight:800;letter-spacing:-1.2px;line-height:1.15}
+.artist-name-eng{margin-top:9px;font-size:13px;font-weight:600;color:var(--muted);letter-spacing:3.5px}
+.artist-title-eng{margin-left:10px;font-size:14px;font-weight:600;color:var(--muted);letter-spacing:2px}
+.artist-info{margin:30px 0 0;border-top:2px solid var(--ink)}
+.artist-info-row{display:flex;align-items:center;gap:22px;padding:13px 2px;border-bottom:1px solid var(--line)}
+.artist-info-row dt{width:78px;flex:none;font-size:12px;font-weight:600;color:var(--muted)}
+.artist-info-row dd{margin:0;font-size:14px;font-weight:600}
+.artist-career{margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:38px}
+.artist-career-col h3{margin:0;padding-bottom:11px;border-bottom:2px solid var(--ink);font-size:13px;letter-spacing:2.6px;display:flex;justify-content:space-between;align-items:baseline}
+.artist-career-col h3 span{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:0}
+.artist-career-row{display:flex;gap:14px;padding:10px 2px;font-size:13px;border-bottom:1px solid var(--line)}
+.artist-career-year{width:42px;flex:none;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.artist-career-title{font-weight:500}
+@media(max-width:900px){.artist-panel{padding:22px}.artist-profile{grid-template-columns:1fr;gap:28px}.artist-photo{max-width:320px}.artist-career{grid-template-columns:1fr;gap:32px;margin-top:40px}}
