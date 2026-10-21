@@ -33,3 +33,14 @@
 .artist-career-year{width:42px;flex:none;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
 .artist-career-title{font-weight:500}
 @media(max-width:900px){.artist-panel{padding:22px}.artist-profile{grid-template-columns:1fr;gap:28px}.artist-photo{max-width:320px}.artist-career{grid-template-columns:1fr;gap:32px;margin-top:40px}}
+.contact-panel{padding:52px 46px}
+.contact-eyebrow{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:2.4px}
+.contact-heading{margin:16px 0 0;font-size:42px;font-weight:800;letter-spacing:-1.4px;line-height:1.1}
+.contact-copy{margin:14px 0 0;color:var(--muted)}
+.contact-grid{margin-top:46px;padding-top:26px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.contact-item{display:block;color:inherit;text-decoration:none}
+.contact-label{display:block;margin-bottom:9px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:2.2px}
+.contact-item strong{font-size:19px;font-weight:700;letter-spacing:-.3px;transition:color .15s ease}
+.contact-item:hover strong{color:var(--coral)}
+.contact-foot{margin-top:58px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:1.6px}
+@media(max-width:600px){.contact-panel{padding:28px 22px}.contact-heading{font-size:30px}.contact-grid{grid-template-columns:1fr;gap:24px}.contact-foot{margin-top:40px;flex-direction:column}}
