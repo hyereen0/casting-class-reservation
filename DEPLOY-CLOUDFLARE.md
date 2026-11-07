@@ -3,7 +3,7 @@
 ## 연결
 
 1. Cloudflare 대시보드에서 **Workers & Pages → Create → Pages → Connect to Git**을 선택하고 GitHub 저장소 `hyereen0/casting-class-reservation`을 연결합니다.
-2. Framework preset은 **None**, Build command는 비워 두고 Build output directory는 `.`으로 설정합니다. 저장소의 `wrangler.toml`이 Pages 출력 디렉터리를 지정합니다.
+2. Framework preset은 **None**, Build command는 `npm ci`, Build output directory는 `.`으로 설정합니다. `npm ci`가 Pages Functions에 필요한 패키지를 설치하고, 저장소의 `wrangler.toml`이 Pages 출력 디렉터리를 지정합니다.
 3. 프로젝트의 **Settings → Variables and Secrets**에서 Production과 Preview 환경 모두 다음 값을 추가합니다.
    - `SUPABASE_URL`
    - `SUPABASE_ANON_KEY`
